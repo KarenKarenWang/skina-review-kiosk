@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "baseUrl": ".",          // 👈 一定要加这一行
+    "lib": ["dom", "dom.iterable", "esnext"],
 
+    "baseUrl": ".", 
     "paths": {
       "@/*": ["./*"]
     },
@@ -17,23 +13,26 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
+
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+
     "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      { "name": "next" }
+    ]
   },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
