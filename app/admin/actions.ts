@@ -1,8 +1,10 @@
 "use server";
 
-import { redis, KEY_UNUSED, KEY_USED } from "@/lib/redis";
+import { getRedis, KEY_UNUSED, KEY_USED } from "@/lib/redis";
 import { isAdminTokenValid } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
+
+const redis = getRedis(); // ✅ 就加在这里（文件顶层）
 
 function requireAdmin(token?: string | null) {
   if (!isAdminTokenValid(token)) {
@@ -33,12 +35,10 @@ export async function bulkAdd(formData: FormData) {
     .map((l) => l.trim())
     .filter(Boolean);
 
-  if (lines.length) {
+  // ✅ 关键：不要 spread
   for (const line of lines) {
     await redis.sadd(KEY_UNUSED, line);
   }
-}
-
 
   revalidatePath("/admin");
 }
