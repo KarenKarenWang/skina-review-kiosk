@@ -34,8 +34,11 @@ export async function bulkAdd(formData: FormData) {
     .filter(Boolean);
 
   if (lines.length) {
-    await redis.sadd(KEY_UNUSED, ...lines);
+  for (const line of lines) {
+    await redis.sadd(KEY_UNUSED, line);
   }
+}
+
 
   revalidatePath("/admin");
 }
