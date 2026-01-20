@@ -6,6 +6,12 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",          // 👈 一定要加这一行
+
+    "paths": {
+      "@/*": ["./*"]
+    },
+
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
